@@ -1,4 +1,5 @@
 import { DashboardLayout } from "@/components/Layout/DashboardLayout";
+import { SettingsPanel } from "@/components/Settings/SettingsPanel";
 
 const Settings = () => {
   return (
@@ -11,9 +12,7 @@ const Settings = () => {
           </p>
         </div>
 
-        <div className="rounded-lg border bg-card p-8 text-center">
-          <p className="text-muted-foreground">Settings panel coming soon...</p>
-        </div>
+        <SettingsPanel />
       </div>
     </DashboardLayout>
   );

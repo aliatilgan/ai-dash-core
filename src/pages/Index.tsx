@@ -3,6 +3,7 @@ import { KPICard } from "@/components/Dashboard/KPICard";
 import { AIPredictor } from "@/components/Dashboard/AIPredictor";
 import { SalesChart } from "@/components/Dashboard/SalesChart";
 import { CategoryChart } from "@/components/Dashboard/CategoryChart";
+import { UserGrowthChart } from "@/components/Dashboard/UserGrowthChart";
 import { DollarSign, TrendingUp, Users, ShoppingCart } from "lucide-react";
 
 const Index = () => {
@@ -59,8 +60,10 @@ const Index = () => {
         {/* Charts */}
         <div className="grid gap-6 lg:grid-cols-2">
           <SalesChart />
-          <CategoryChart />
+          <UserGrowthChart />
         </div>
+
+        <CategoryChart />
 
         {/* Recent Activity */}
         <div className="rounded-lg border bg-card p-6 animate-fade-in">
