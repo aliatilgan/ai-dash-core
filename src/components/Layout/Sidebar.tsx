@@ -1,6 +1,8 @@
-import { LayoutDashboard, BarChart3, Users, Settings, Sparkles } from "lucide-react";
+import { LayoutDashboard, BarChart3, Users, Settings, Sparkles, Shield } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -10,7 +12,20 @@ const navigation = [
   { name: "Settings", href: "/settings", icon: Settings },
 ];
 
+const adminNavigation = [
+  { name: "User Management", href: "/user-management", icon: Shield },
+];
+
 export const Sidebar = () => {
+  const { user } = useAuth();
+  const { toast } = useToast();
+
+  const handleUpgradeClick = () => {
+    toast({
+      title: "🚀 Pro Features Coming Soon!",
+      description: "Advanced AI features and unlimited analytics will be available soon. Stay tuned for updates!",
+    });
+  };
   return (
     <aside className="hidden lg:flex lg:flex-col lg:w-64 border-r bg-sidebar">
       <div className="flex h-16 items-center border-b px-6">
@@ -43,6 +58,35 @@ export const Sidebar = () => {
             {item.name}
           </NavLink>
         ))}
+        
+        {/* Admin-only navigation */}
+        {user?.role === 'admin' && (
+          <>
+            <div className="border-t border-sidebar-border my-2"></div>
+            <div className="px-3 py-2">
+              <p className="text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider">
+                Admin
+              </p>
+            </div>
+            {adminNavigation.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
+                    isActive
+                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+                  )
+                }
+              >
+                <item.icon className="h-5 w-5" />
+                {item.name}
+              </NavLink>
+            ))}
+          </>
+        )}
       </nav>
 
       <div className="border-t p-4">
@@ -51,7 +95,10 @@ export const Sidebar = () => {
           <p className="text-xs text-muted-foreground mb-3">
             Unlock advanced AI features and unlimited insights.
           </p>
-          <button className="w-full rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+          <button 
+            onClick={handleUpgradeClick}
+            className="w-full rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
             Upgrade Now
           </button>
         </div>

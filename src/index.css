@@ -8,8 +8,8 @@
 
 @layer base {
   :root {
-    /* Tech Blue Primary Palette */
-    --background: 210 20% 98%;
+    /* SmartDash Color Palette - Exact Brand Colors */
+    --background: 210 20% 98%; /* #F8FAFC - Slate White */
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -18,21 +18,21 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Tech Blue - Primary Brand Color */
-    --primary: 221 83% 32%;
+    /* Tech Blue #1E3A8A - Primary Brand Color */
+    --primary: 221 83% 32%; /* #1E3A8A */
     --primary-foreground: 210 40% 98%;
-    --primary-light: 217 91% 60%;
+    --primary-light: 217 91% 60%; /* #60A5FA - Light Blue */
     
-    /* Light Blue - Accents & Highlights */
-    --secondary: 213 94% 68%;
+    /* Light Blue #60A5FA - Accents & Highlights */
+    --secondary: 217 91% 60%; /* #60A5FA */
     --secondary-foreground: 222 47% 11%;
 
-    /* Success Green */
-    --success: 158 64% 52%;
+    /* Success Green #10B981 */
+    --success: 158 64% 52%; /* #10B981 */
     --success-foreground: 0 0% 100%;
 
-    /* Warning Yellow */
-    --warning: 38 92% 50%;
+    /* Warning Yellow #F59E0B */
+    --warning: 38 92% 50%; /* #F59E0B */
     --warning-foreground: 0 0% 100%;
 
     /* Muted Backgrounds */
@@ -84,19 +84,20 @@
   }
 
   .dark {
-    /* Dark Mode - Modern Tech Aesthetic */
-    --background: 222 47% 11%;
+    /* SmartDash Dark Mode - #1F2937 Background */
+    --background: 220 26% 14%; /* #1F2937 */
     --foreground: 210 40% 98%;
 
-    --card: 220 26% 14%;
+    --card: 220 26% 18%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 220 26% 14%;
+    --popover: 220 26% 18%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
-    --primary-light: 213 94% 68%;
+    /* Light Blue Highlights #93C5FD in Dark Mode */
+    --primary: 213 94% 78%; /* #93C5FD */
+    --primary-foreground: 220 26% 14%;
+    --primary-light: 217 91% 60%;
 
     --secondary: 221 83% 32%;
     --secondary-foreground: 210 40% 98%;

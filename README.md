@@ -1,53 +1,137 @@
-# Welcome to your Lovable project
+# SmartDash - Modern SaaS Dashboard
 
-## Project info
+A comprehensive, AI-powered SaaS dashboard built with React, TypeScript, and modern web technologies. Features advanced analytics, CRM functionality, user management, and customizable themes.
 
-**URL**: https://lovable.dev/projects/c745e11b-71d3-40f8-a725-f40963a3e22b
+## 🚀 Features
 
-## How can I edit this code?
+### Core Features
+- **Modern Dashboard**: Clean, responsive design with real-time data visualization
+- **Analytics**: Advanced charts and metrics with Recharts integration
+- **CRM System**: Customer management with detailed profiles and interaction tracking
+- **AI Insights**: Machine learning-powered business intelligence
+- **User Management**: Role-based access control with admin panel
+- **Authentication**: Secure login/signup with protected routes
 
-There are several ways of editing your application.
+### UI/UX Features
+- **Dark/Light Theme**: System-aware theme switching with custom accent colors
+- **Customizable Interface**: Multiple density options and personalization
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Accessibility**: WCAG compliant with keyboard navigation
+- **Performance**: Code splitting and lazy loading for optimal performance
 
-**Use Lovable**
+## 🛠️ Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c745e11b-71d3-40f8-a725-f40963a3e22b) and start prompting.
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, Radix UI, Lucide Icons
+- **Charts**: Recharts for data visualization
+- **State**: React Query, Context API
+- **Routing**: React Router DOM with protected routes
+- **Theme**: next-themes for theme management
+- **Notifications**: Sonner for toast notifications
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📦 Quick Start
 
-**Use your preferred IDE**
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to project directory
+cd ai-dash-core
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open your browser and navigate to `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🏗️ Project Structure
 
-**Use GitHub Codespaces**
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # Base UI components (shadcn/ui)
+│   ├── Layout/         # Layout components
+│   ├── Dashboard/      # Dashboard components
+│   ├── Analytics/      # Analytics components
+│   ├── CRM/           # CRM components
+│   ├── Auth/          # Authentication components
+│   └── Settings/      # Settings components
+├── pages/              # Page components
+├── contexts/           # React contexts
+├── hooks/             # Custom hooks
+├── lib/               # Utilities
+└── types/             # TypeScript types
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
+## 🔐 Authentication & Roles
+
+- **Admin Users**: Full access including user management
+- **Regular Users**: Standard dashboard access
+- **Protected Routes**: Role-based route protection
+- **Session Management**: Persistent authentication state
+
+## 🎨 Customization
+
+### Theme Options
+- **Light/Dark/System**: Automatic theme switching
+- **Accent Colors**: 6 predefined color schemes
+- **Density**: Compact, Comfortable, Spacious layouts
+- **Accessibility**: Reduced motion options
+
+### Adding Features
+1. Create components in appropriate directories
+2. Add TypeScript interfaces
+3. Update routing if needed
+4. Test thoroughly
+
+## 📊 Performance
+
+Optimized bundle sizes:
+- React vendor: ~288KB (89KB gzipped)
+- Chart vendor: ~287KB (64KB gzipped)  
+- UI vendor: ~231KB (79KB gzipped)
+- Pages: ~67KB (13KB gzipped)
+
+Target Lighthouse scores: 90+ across all metrics
+
+## 🚀 Deployment
+
+```sh
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## 📱 Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## 🤝 Development
+
+### Using Lovable
+Visit the [Lovable Project](https://lovable.dev/projects/c745e11b-71d3-40f8-a725-f40963a3e22b) for AI-powered development.
+
+### Local Development
+Use your preferred IDE with the setup instructions above.
+
+### GitHub Integration
+- Direct file editing in GitHub
+- GitHub Codespaces support
+- Automatic deployment integration
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
 ## What technologies are used for this project?

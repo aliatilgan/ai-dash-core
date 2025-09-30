@@ -1,6 +1,24 @@
 import { useState } from "react";
-import { MoreVertical, Mail, Phone, TrendingUp, Edit, Trash } from "lucide-react";
+import { MoreVertical, Mail, Phone, TrendingUp, Edit, Trash, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +26,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 interface Customer {
   id: string;
@@ -20,61 +39,70 @@ interface Customer {
   lastContact: string;
 }
 
-const customers: Customer[] = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john@techcorp.com",
-    phone: "+1 (555) 123-4567",
-    company: "TechCorp Inc.",
-    status: "active",
-    value: "$125,000",
-    lastContact: "2 days ago",
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    email: "jane@innovate.io",
-    phone: "+1 (555) 234-5678",
-    company: "Innovate Solutions",
-    status: "active",
-    value: "$89,500",
-    lastContact: "1 week ago",
-  },
-  {
-    id: "3",
-    name: "Mike Johnson",
-    email: "mike@startup.co",
-    phone: "+1 (555) 345-6789",
-    company: "Startup Co.",
-    status: "pending",
-    value: "$45,000",
-    lastContact: "3 days ago",
-  },
-  {
-    id: "4",
-    name: "Sarah Williams",
-    email: "sarah@enterprise.com",
-    phone: "+1 (555) 456-7890",
-    company: "Enterprise Ltd.",
-    status: "active",
-    value: "$210,000",
-    lastContact: "Yesterday",
-  },
-  {
-    id: "5",
-    name: "Tom Brown",
-    email: "tom@legacy.com",
-    phone: "+1 (555) 567-8901",
-    company: "Legacy Systems",
-    status: "inactive",
-    value: "$12,000",
-    lastContact: "2 months ago",
-  },
-];
-
 export const CustomerTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [customers, setCustomers] = useState<Customer[]>([
+    {
+      id: "1",
+      name: "John Doe",
+      email: "john@techcorp.com",
+      phone: "+1 (555) 123-4567",
+      company: "TechCorp Inc.",
+      status: "active",
+      value: "$125,000",
+      lastContact: "2 days ago",
+    },
+    {
+      id: "2",
+      name: "Jane Smith",
+      email: "jane@innovate.io",
+      phone: "+1 (555) 234-5678",
+      company: "Innovate Solutions",
+      status: "active",
+      value: "$89,500",
+      lastContact: "1 week ago",
+    },
+    {
+      id: "3",
+      name: "Mike Johnson",
+      email: "mike@startup.co",
+      phone: "+1 (555) 345-6789",
+      company: "Startup Co.",
+      status: "pending",
+      value: "$45,000",
+      lastContact: "3 days ago",
+    },
+    {
+      id: "4",
+      name: "Sarah Williams",
+      email: "sarah@enterprise.com",
+      phone: "+1 (555) 456-7890",
+      company: "Enterprise Ltd.",
+      status: "active",
+      value: "$210,000",
+      lastContact: "Yesterday",
+    },
+    {
+      id: "5",
+      name: "Tom Brown",
+      email: "tom@legacy.com",
+      phone: "+1 (555) 567-8901",
+      company: "Legacy Systems",
+      status: "inactive",
+      value: "$12,000",
+      lastContact: "2 months ago",
+    },
+  ]);
+
+  const [newCustomer, setNewCustomer] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    status: "active" as "active" | "inactive" | "pending",
+    value: "",
+  });
 
   const filteredCustomers = customers.filter(
     (customer) =>
@@ -97,6 +125,36 @@ export const CustomerTable = () => {
     );
   };
 
+  const handleAddCustomer = () => {
+    if (!newCustomer.name || !newCustomer.email || !newCustomer.company) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    const customer: Customer = {
+      id: (customers.length + 1).toString(),
+      name: newCustomer.name,
+      email: newCustomer.email,
+      phone: newCustomer.phone || "Not provided",
+      company: newCustomer.company,
+      status: newCustomer.status,
+      value: newCustomer.value || "$0",
+      lastContact: "Just added",
+    };
+
+    setCustomers([...customers, customer]);
+    setNewCustomer({
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      status: "active",
+      value: "",
+    });
+    setIsAddDialogOpen(false);
+    toast.success("Customer added successfully!");
+  };
+
   return (
     <div className="rounded-lg border bg-card animate-fade-in">
       <div className="p-6 border-b">
@@ -107,9 +165,89 @@ export const CustomerTable = () => {
               Manage and track your customer relationships
             </p>
           </div>
-          <Button className="bg-primary hover:bg-primary/90">
-            Add Customer
-          </Button>
+          <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-primary hover:bg-primary/90">
+                <Plus className="h-4 w-4 mr-2" />
+                Add Customer
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Add New Customer</DialogTitle>
+                <DialogDescription>
+                  Add a new customer to your CRM system.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Full Name *</Label>
+                  <Input
+                    id="name"
+                    value={newCustomer.name}
+                    onChange={(e) => setNewCustomer({ ...newCustomer, name: e.target.value })}
+                    placeholder="Enter customer name"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={newCustomer.email}
+                    onChange={(e) => setNewCustomer({ ...newCustomer, email: e.target.value })}
+                    placeholder="Enter email address"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="phone">Phone</Label>
+                  <Input
+                    id="phone"
+                    value={newCustomer.phone}
+                    onChange={(e) => setNewCustomer({ ...newCustomer, phone: e.target.value })}
+                    placeholder="Enter phone number"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="company">Company *</Label>
+                  <Input
+                    id="company"
+                    value={newCustomer.company}
+                    onChange={(e) => setNewCustomer({ ...newCustomer, company: e.target.value })}
+                    placeholder="Enter company name"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="value">Customer Value</Label>
+                  <Input
+                    id="value"
+                    value={newCustomer.value}
+                    onChange={(e) => setNewCustomer({ ...newCustomer, value: e.target.value })}
+                    placeholder="e.g., $50,000"
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="status">Status</Label>
+                  <Select value={newCustomer.status} onValueChange={(value: any) => setNewCustomer({ ...newCustomer, status: value })}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="pending">Pending</SelectItem>
+                      <SelectItem value="inactive">Inactive</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={handleAddCustomer}>Add Customer</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
         <input
           type="search"

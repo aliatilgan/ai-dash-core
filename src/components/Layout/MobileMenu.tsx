@@ -3,6 +3,7 @@ import { Menu, X, LayoutDashboard, BarChart3, Users, Settings, Sparkles } from "
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -14,6 +15,15 @@ const navigation = [
 
 export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleUpgradeClick = () => {
+    toast({
+      title: "🚀 Pro Features Coming Soon!",
+      description: "Advanced AI features and unlimited analytics will be available soon. Stay tuned for updates!",
+    });
+    setIsOpen(false); // Close mobile menu
+  };
 
   return (
     <>
@@ -72,7 +82,10 @@ export const MobileMenu = () => {
                 <p className="text-xs text-muted-foreground mb-3">
                   Unlock advanced AI features and unlimited insights.
                 </p>
-                <button className="w-full rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+                <button 
+                  onClick={handleUpgradeClick}
+                  className="w-full rounded-md bg-primary px-3 py-2 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
                   Upgrade Now
                 </button>
               </div>
